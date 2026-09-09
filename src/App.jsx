@@ -16,10 +16,8 @@ function App() {
     <LanguageProvider>
       <Router>
         <div className="flex flex-col min-h-screen bg-[#f4f6f8]">
-          <div className="sticky top-0 z-50">
-            <Header />
-            <Navbar />
-          </div>
+          <Header />
+          <Navbar />
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<Home />} />
