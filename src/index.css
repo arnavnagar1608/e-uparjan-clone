@@ -1,10 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-govGreen-900: #14532d; /* Tailwind green-900 - very dark, formal */
-  --color-govGreen-800: #166534; /* Tailwind green-800 */
-  --color-govGreen-700: #15803d; /* Tailwind green-700 */
-  --color-govGreen-600: #16a34a; /* Tailwind green-600 */
+  /* Original Green Theme (Saved for reverting later) */
+  /* --color-govGreen-900: #14532d; */
+  /* --color-govGreen-800: #166534; */
+  /* --color-govGreen-700: #15803d; */
+  /* --color-govGreen-600: #16a34a; */
+
+  /* Temporary Blue Theme */
+  --color-govGreen-900: #1e3a8a; /* Tailwind blue-900 */
+  --color-govGreen-800: #1e40af; /* Tailwind blue-800 */
+  --color-govGreen-700: #1d4ed8; /* Tailwind blue-700 */
+  --color-govGreen-600: #2563eb; /* Tailwind blue-600 */
+  
   --color-govSaffron-500: #f97316; /* Saffron/orange for flag accents */
 }
 
