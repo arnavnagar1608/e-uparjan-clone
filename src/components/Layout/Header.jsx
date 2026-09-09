@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Globe, LogIn, UserPlus } from 'lucide-react';
+import { Search, Globe, LogIn, UserPlus, Bell } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
 
@@ -62,7 +62,11 @@ const Header = () => {
             <Search className="absolute right-2 top-2 text-gray-500" size={16} />
           </div>
           
-          <div className="flex space-x-2">
+          <div className="flex space-x-2 items-center">
+            <button className="relative p-2 text-gray-600 hover:text-govGreen-700 hover:bg-gray-100 rounded-full transition-colors mr-2">
+              <Bell size={20} />
+              <span className="absolute top-1 right-1.5 w-2.5 h-2.5 bg-red-500 rounded-full border border-white"></span>
+            </button>
             <Link to="/login" className="flex items-center space-x-1 bg-white text-govGreen-800 border border-govGreen-800 px-4 py-1.5 rounded-sm text-sm font-medium hover:bg-gray-50 transition-colors">
               <LogIn size={16} />
               <span>{t('login')}</span>
