@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-
-const faqs = [
-  {
-    question: "How can I register for Kharif procurement?",
-    answer: "Farmers can register online via the e-Uparjan portal by clicking on 'Farmer Registration' under Citizen Services. You will need your Aadhaar number, Samagra ID, and mobile number."
-  },
-  {
-    question: "When will the payment be credited to my account?",
-    answer: "The payment for the procured crop is typically credited directly to your Aadhaar-linked bank account via Direct Benefit Transfer (DBT) within 7 working days after successful procurement."
-  },
-  {
-    question: "Can I change my slot booking date?",
-    answer: "No, once a slot is booked, it cannot be changed online. If you miss your slot due to emergencies, please contact your district procurement officer."
-  }
-];
+import { useLanguage } from '../../context/LanguageContext';
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
+  const { t } = useLanguage();
+
+  const faqs = [
+    {
+      question: t('faq_q1'),
+      answer: t('faq_a1')
+    },
+    {
+      question: t('faq_q2'),
+      answer: t('faq_a2')
+    },
+    {
+      question: t('faq_q3'),
+      answer: t('faq_a3')
+    }
+  ];
 
   const toggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -27,7 +29,7 @@ const FAQ = () => {
     <section className="mb-12">
       <div className="flex items-center mb-6 border-b border-gray-300 pb-2">
         <h2 className="text-xl font-bold text-govGreen-900 border-l-4 border-govSaffron-500 pl-3">
-          Frequently Asked Questions (FAQ)
+          {t('faq_title')}
         </h2>
       </div>
       

@@ -5,32 +5,40 @@ import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
 import Home from './pages/Home';
 import StubPage from './pages/StubPage';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import { LanguageProvider } from './context/LanguageContext';
 
 function App() {
   return (
-    <Router>
-      <div className="flex flex-col min-h-screen bg-[#f4f6f8]">
-        <Header />
-        <Navbar />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<StubPage title="About Us" />} />
-            <Route path="/register" element={<StubPage title="Farmer Registration" />} />
-            <Route path="/status" element={<StubPage title="Track Status" />} />
-            <Route path="/centers" element={<StubPage title="Procurement Centers" />} />
-            <Route path="/guidelines" element={<StubPage title="Guidelines" />} />
-            <Route path="/contact" element={<StubPage title="Contact Us" />} />
-            
-            {/* Services Dropdown */}
-            <Route path="/services/slot-booking" element={<StubPage title="Slot Booking" />} />
-            <Route path="/services/receipt" element={<StubPage title="Print Receipt" />} />
-            <Route path="/services/grievance" element={<StubPage title="Lodge Grievance" />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <div className="flex flex-col min-h-screen bg-[#f4f6f8]">
+          <Header />
+          <Navbar />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/about" element={<StubPage titleKey="about_us" />} />
+              <Route path="/status" element={<StubPage titleKey="track_status" />} />
+              <Route path="/centers" element={<StubPage titleKey="proc_centers" />} />
+              <Route path="/guidelines" element={<StubPage titleKey="guidelines" />} />
+              <Route path="/contact" element={<StubPage titleKey="contact_us" />} />
+              
+              {/* Services Dropdown */}
+              <Route path="/services/slot-booking" element={<StubPage titleKey="slot_booking" />} />
+              <Route path="/services/receipt" element={<StubPage titleKey="print_receipt" />} />
+              <Route path="/services/grievance" element={<StubPage titleKey="grievance" />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </LanguageProvider>
   );
 }
 

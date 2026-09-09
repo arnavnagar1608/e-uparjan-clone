@@ -1,17 +1,20 @@
 import React from 'react';
 import { Users, Truck, Database, IndianRupee } from 'lucide-react';
-
-const stats = [
-  { label: "Registered Farmers", value: "1.18 Cr+", icon: Users },
-  { label: "Grain Procured (MT)", value: "241.56 L", icon: Truck },
-  { label: "Total Payment (₹)", value: "69,111 Cr", icon: IndianRupee },
-  { label: "Active Centers", value: "4,520", icon: Database },
-];
+import { useLanguage } from '../../context/LanguageContext';
 
 const Statistics = () => {
+  const { t } = useLanguage();
+
+  const stats = [
+    { label: t('stat_1_label'), value: t('stat_1_val'), icon: Users },
+    { label: t('stat_2_label'), value: t('stat_2_val'), icon: Truck },
+    { label: t('stat_3_label'), value: t('stat_3_val'), icon: IndianRupee },
+    { label: t('stat_4_label'), value: t('stat_4_val'), icon: Database },
+  ];
+
   return (
     <section className="bg-white gov-border p-6 mt-8">
-      <h2 className="text-xl font-bold text-center text-govGreen-900 mb-2">Procurement Statistics (Last 5 Years)</h2>
+      <h2 className="text-xl font-bold text-center text-govGreen-900 mb-2">{t('stats_title')}</h2>
       <div className="w-16 h-1 bg-govSaffron-500 mx-auto mb-8"></div>
       
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">

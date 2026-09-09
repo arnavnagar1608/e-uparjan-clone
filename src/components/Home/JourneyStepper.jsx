@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Check, UserPlus, Map, MapPin, Calendar, Truck, ClipboardCheck, Scale, IndianRupee } from 'lucide-react';
-
-const steps = [
-  { id: 1, title: 'Farmer Registration', subtitle: 'Create your farmer account', icon: UserPlus },
-  { id: 2, title: 'Land & Crop Details', subtitle: 'Add land and crop information', icon: Map },
-  { id: 3, title: 'Select Procurement Centre', subtitle: 'Choose your nearest procurement centre', icon: MapPin },
-  { id: 4, title: 'Book Procurement Slot', subtitle: 'Select your preferred date and time', icon: Calendar },
-  { id: 5, title: 'Bring Produce', subtitle: 'Bring your produce to the centre', icon: Truck },
-  { id: 6, title: 'Quality Verification', subtitle: 'Produce quality is checked', icon: ClipboardCheck },
-  { id: 7, title: 'Weighing & Procurement', subtitle: 'Produce is weighed and procured', icon: Scale },
-  { id: 8, title: 'Payment', subtitle: 'Receive payment directly', icon: IndianRupee },
-];
+import { useLanguage } from '../../context/LanguageContext';
 
 const JourneyStepper = () => {
-  // Let's set a demo state where step 4 is current
   const [currentStep, setCurrentStep] = useState(4);
+  const { t } = useLanguage();
+
+  const steps = [
+    { id: 1, title: t('step_1_title'), subtitle: t('step_1_sub'), icon: UserPlus },
+    { id: 2, title: t('step_2_title'), subtitle: t('step_2_sub'), icon: Map },
+    { id: 3, title: t('step_3_title'), subtitle: t('step_3_sub'), icon: MapPin },
+    { id: 4, title: t('step_4_title'), subtitle: t('step_4_sub'), icon: Calendar },
+    { id: 5, title: t('step_5_title'), subtitle: t('step_5_sub'), icon: Truck },
+    { id: 6, title: t('step_6_title'), subtitle: t('step_6_sub'), icon: ClipboardCheck },
+    { id: 7, title: t('step_7_title'), subtitle: t('step_7_sub'), icon: Scale },
+    { id: 8, title: t('step_8_title'), subtitle: t('step_8_sub'), icon: IndianRupee },
+  ];
 
   return (
     <section className="bg-white gov-border p-6 md:p-10 mb-8 mt-2 relative overflow-hidden">
@@ -25,10 +27,10 @@ const JourneyStepper = () => {
 
       <div className="text-center mb-10 relative z-10">
         <h2 className="text-2xl md:text-3xl font-extrabold text-govGreen-900 mb-2">
-          From Registration to Payment
+          {t('stepper_title')}
         </h2>
         <p className="text-base text-gray-600 font-medium">
-          Follow these simple steps to complete your farmer procurement process.
+          {t('stepper_desc')}
         </p>
         <div className="w-16 h-1 bg-govSaffron-500 mx-auto mt-4"></div>
       </div>
@@ -100,7 +102,7 @@ const JourneyStepper = () => {
                     text-xs font-bold uppercase tracking-wide mb-1
                     ${isCurrent ? 'text-govGreen-800' : 'text-gray-500'}
                   `}>
-                    Step {step.id}
+                    {t('step')} {step.id}
                   </div>
                   <h3 className={`
                     text-sm font-bold leading-tight mb-1
@@ -130,12 +132,12 @@ const JourneyStepper = () => {
 
       {/* Action Buttons */}
       <div className="mt-12 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 relative z-10">
-        <button className="w-full sm:w-auto bg-govSaffron-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-sm shadow-md transition-colors text-sm uppercase tracking-wide">
-          Start Registration
-        </button>
-        <button className="w-full sm:w-auto bg-white border-2 border-govGreen-800 text-govGreen-800 hover:bg-gray-50 font-bold py-3 px-8 rounded-sm shadow-sm transition-colors text-sm uppercase tracking-wide">
-          Track My Procurement
-        </button>
+        <Link to="/register" className="w-full sm:w-auto bg-govSaffron-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-sm shadow-md transition-colors text-sm uppercase tracking-wide text-center">
+          {t('start_reg_btn')}
+        </Link>
+        <Link to="/status" className="w-full sm:w-auto bg-white border-2 border-govGreen-800 text-govGreen-800 hover:bg-gray-50 font-bold py-3 px-8 rounded-sm shadow-sm transition-colors text-sm uppercase tracking-wide text-center">
+          {t('track_proc_btn')}
+        </Link>
       </div>
     </section>
   );

@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { t } = useLanguage();
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
-    { name: 'Farmer Registration', path: '/register' },
-    { name: 'Track Status', path: '/status' },
-    { name: 'Procurement Centers', path: '/centers' },
-    { name: 'Guidelines', path: '/guidelines' },
-    { name: 'Contact Us', path: '/contact' },
+    { nameKey: 'home', path: '/' },
+    { nameKey: 'about_us', path: '/about' },
+    { nameKey: 'farmer_reg', path: '/register' },
+    { nameKey: 'track_status', path: '/status' },
+    { nameKey: 'proc_centers', path: '/centers' },
+    { nameKey: 'guidelines', path: '/guidelines' },
+    { nameKey: 'contact_us', path: '/contact' },
   ];
 
   return (
@@ -28,7 +30,7 @@ const Navbar = () => {
                 to={link.path}
                 className="px-4 py-3 text-sm font-medium hover:bg-govGreen-700 hover:text-govSaffron-500 transition-colors border-l border-govGreen-700 last:border-r"
               >
-                {link.name}
+                {t(link.nameKey)}
               </Link>
             ))}
             
@@ -39,13 +41,13 @@ const Navbar = () => {
               onMouseLeave={() => setDropdownOpen(false)}
             >
               <button className="flex items-center px-4 py-3 text-sm font-medium hover:bg-govGreen-700 hover:text-govSaffron-500 transition-colors border-r border-govGreen-700">
-                Services <ChevronDown size={14} className="ml-1" />
+                {t('services')} <ChevronDown size={14} className="ml-1" />
               </button>
               {dropdownOpen && (
                 <div className="absolute top-full left-0 w-48 bg-white text-gray-800 border-t-2 border-govSaffron-500 shadow-lg">
-                  <Link to="/services/slot-booking" className="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-100">Slot Booking</Link>
-                  <Link to="/services/receipt" className="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-100">Print Receipt</Link>
-                  <Link to="/services/grievance" className="block px-4 py-2 text-sm hover:bg-gray-100">Grievance</Link>
+                  <Link to="/services/slot-booking" className="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-100">{t('slot_booking')}</Link>
+                  <Link to="/services/receipt" className="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-100">{t('print_receipt')}</Link>
+                  <Link to="/services/grievance" className="block px-4 py-2 text-sm hover:bg-gray-100">{t('grievance')}</Link>
                 </div>
               )}
             </div>
@@ -74,13 +76,13 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
                 className="block px-3 py-2 text-base font-medium hover:bg-govGreen-700 hover:text-govSaffron-500"
               >
-                {link.name}
+                {t(link.nameKey)}
               </Link>
             ))}
             {/* Mobile Dropdown items added inline for simplicity */}
-            <Link to="/services/slot-booking" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium hover:bg-govGreen-700 hover:text-govSaffron-500 border-t border-govGreen-800 text-govSaffron-500">— Slot Booking</Link>
-            <Link to="/services/receipt" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium hover:bg-govGreen-700 hover:text-govSaffron-500 text-govSaffron-500">— Print Receipt</Link>
-            <Link to="/services/grievance" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium hover:bg-govGreen-700 hover:text-govSaffron-500 text-govSaffron-500">— Grievance</Link>
+            <Link to="/services/slot-booking" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium hover:bg-govGreen-700 hover:text-govSaffron-500 border-t border-govGreen-800 text-govSaffron-500">— {t('slot_booking')}</Link>
+            <Link to="/services/receipt" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium hover:bg-govGreen-700 hover:text-govSaffron-500 text-govSaffron-500">— {t('print_receipt')}</Link>
+            <Link to="/services/grievance" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium hover:bg-govGreen-700 hover:text-govSaffron-500 text-govSaffron-500">— {t('grievance')}</Link>
           </div>
         </div>
       )}

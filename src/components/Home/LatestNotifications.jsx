@@ -1,32 +1,35 @@
 import React from 'react';
 import { Download, FileText } from 'lucide-react';
-
-const notifications = [
-  { id: 1, title: "Guidelines for Kharif Procurement 2026-27", dept: "Food & Civil Supplies", date: "05-Sep-2026" },
-  { id: 2, title: "Revised FAQ for Slot Booking via Mobile App", dept: "NIC MP", date: "01-Sep-2026" },
-  { id: 3, title: "Order: Mandatory Aadhaar Linking for DBT", dept: "Finance Dept", date: "28-Aug-2026" },
-  { id: 4, title: "List of Active Procurement Centers - Bhopal", dept: "District Admin", date: "25-Aug-2026" },
-];
+import { useLanguage } from '../../context/LanguageContext';
 
 const LatestNotifications = () => {
+  const { t } = useLanguage();
+
+  const notifications = [
+    { id: 1, title: t('notif_1'), dept: t('dept_1'), date: "05-Sep-2026" },
+    { id: 2, title: t('notif_2'), dept: t('dept_2'), date: "01-Sep-2026" },
+    { id: 3, title: t('notif_3'), dept: t('dept_3'), date: "28-Aug-2026" },
+    { id: 4, title: t('notif_4'), dept: t('dept_4'), date: "25-Aug-2026" },
+  ];
+
   return (
     <section>
       <div className="flex items-center mb-6 justify-between border-b border-gray-300 pb-2">
         <h2 className="text-xl font-bold text-govGreen-900 border-l-4 border-govSaffron-500 pl-3">
-          Latest Notifications & Circulars
+          {t('notif_title')}
         </h2>
-        <a href="#" className="text-sm font-semibold text-govGreen-700 hover:underline">View All</a>
+        <a href="#" className="text-sm font-semibold text-govGreen-700 hover:underline">{t('view_all')}</a>
       </div>
       
       <div className="bg-white gov-border overflow-x-auto">
         <table className="w-full text-left text-sm text-gray-700">
           <thead className="bg-green-50 text-govGreen-900 uppercase font-bold text-xs border-b-2 border-green-200">
             <tr>
-              <th className="px-4 py-3 border-b">Sr.No</th>
-              <th className="px-4 py-3 border-b">Title / Subject</th>
-              <th className="px-4 py-3 border-b hidden sm:table-cell">Department</th>
-              <th className="px-4 py-3 border-b">Date</th>
-              <th className="px-4 py-3 border-b text-center">Download</th>
+              <th className="px-4 py-3 border-b">{t('sr_no')}</th>
+              <th className="px-4 py-3 border-b">{t('title_subject')}</th>
+              <th className="px-4 py-3 border-b hidden sm:table-cell">{t('department')}</th>
+              <th className="px-4 py-3 border-b">{t('date')}</th>
+              <th className="px-4 py-3 border-b text-center">{t('download')}</th>
             </tr>
           </thead>
           <tbody>
@@ -42,7 +45,7 @@ const LatestNotifications = () => {
                 <td className="px-4 py-3 hidden sm:table-cell">{notif.dept}</td>
                 <td className="px-4 py-3 whitespace-nowrap">{notif.date}</td>
                 <td className="px-4 py-3 text-center">
-                  <button className="text-red-600 hover:text-red-800 transition-colors" title="Download PDF">
+                  <button className="text-red-600 hover:text-red-800 transition-colors" title={t('download')}>
                     <Download size={18} className="inline" />
                   </button>
                 </td>

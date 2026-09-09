@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Search, Globe, LogIn, UserPlus } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Header = () => {
-  const [lang, setLang] = useState('English');
+  const { language, toggleLanguage, t } = useLanguage();
 
   return (
     <header className="w-full bg-white border-b border-gray-300">
       {/* Top Utility Bar */}
       <div className="bg-govGreen-900 text-white text-xs py-1 px-4 md:px-8 flex justify-between items-center">
         <div className="flex space-x-4">
-          <a href="#" className="hover:underline">Government of India</a>
+          <a href="#" className="hover:underline">{t('gov_india')}</a>
           <span className="hidden sm:inline">|</span>
-          <a href="#" className="hidden sm:inline hover:underline">Department of Agriculture & Farmers Welfare</a>
+          <a href="#" className="hidden sm:inline hover:underline">{t('dept_agri')}</a>
         </div>
         <div className="flex space-x-4 items-center">
-          <a href="#main-content" className="hover:underline">Skip to Main Content</a>
+          <a href="#main-content" className="hover:underline">{t('skip_main')}</a>
           <span className="hidden sm:inline">|</span>
           <div className="flex space-x-1 items-center">
             <button className="px-1 border border-transparent hover:border-white">A-</button>
@@ -25,10 +26,10 @@ const Header = () => {
           <span className="hidden sm:inline">|</span>
           <button 
             className="flex items-center space-x-1 hover:underline"
-            onClick={() => setLang(lang === 'English' ? 'हिन्दी' : 'English')}
+            onClick={toggleLanguage}
           >
             <Globe size={12} />
-            <span>{lang}</span>
+            <span>{language === 'en' ? 'English' : 'हिन्दी'}</span>
           </button>
         </div>
       </div>
@@ -46,7 +47,7 @@ const Header = () => {
               ई-उपार्जन (E-Uparjan)
             </h1>
             <p className="text-sm md:text-base font-semibold text-gray-700">
-              Kisan Samriddhi Portal
+              {t('kisan_samriddhi')}
             </p>
           </div>
         </div>
@@ -55,7 +56,7 @@ const Header = () => {
           <div className="relative">
             <input 
               type="text" 
-              placeholder="Search..." 
+              placeholder={t('search')} 
               className="pl-3 pr-10 py-1.5 border border-gray-300 rounded-sm text-sm focus:outline-none focus:border-govGreen-700"
             />
             <Search className="absolute right-2 top-2 text-gray-500" size={16} />
@@ -64,11 +65,11 @@ const Header = () => {
           <div className="flex space-x-2">
             <Link to="/login" className="flex items-center space-x-1 bg-white text-govGreen-800 border border-govGreen-800 px-4 py-1.5 rounded-sm text-sm font-medium hover:bg-gray-50 transition-colors">
               <LogIn size={16} />
-              <span>Login</span>
+              <span>{t('login')}</span>
             </Link>
             <Link to="/register" className="flex items-center space-x-1 bg-govGreen-700 text-white px-4 py-1.5 rounded-sm text-sm font-medium hover:bg-govGreen-800 transition-colors">
               <UserPlus size={16} />
-              <span>Register</span>
+              <span>{t('register')}</span>
             </Link>
           </div>
         </div>
