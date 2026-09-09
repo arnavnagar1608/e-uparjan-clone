@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-govGreen-900: #14532d; /* Tailwind green-900 - very dark, formal */
+  --color-govGreen-800: #166534; /* Tailwind green-800 */
+  --color-govGreen-700: #15803d; /* Tailwind green-700 */
+  --color-govGreen-600: #16a34a; /* Tailwind green-600 */
+  --color-govSaffron-500: #f97316; /* Saffron/orange for flag accents */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8fafc;
+}
+
+.gov-border {
+  border: 1px solid var(--color-gray-300, #d1d5db);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 0.125rem;
+}
