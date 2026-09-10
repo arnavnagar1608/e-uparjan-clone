@@ -8,6 +8,7 @@ import StubPage from './pages/StubPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
+import TrackingDashboard from './pages/TrackingDashboard';
 import { LanguageProvider } from './context/LanguageContext';
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/about" element={<StubPage titleKey="about_us" />} />
-              <Route path="/status" element={<StubPage titleKey="track_status" />} />
+              <Route path="/status" element={<TrackingDashboard />} />
               <Route path="/centers" element={<StubPage titleKey="proc_centers" />} />
               <Route path="/guidelines" element={<StubPage titleKey="guidelines" />} />
               <Route path="/contact" element={<StubPage titleKey="contact_us" />} />
