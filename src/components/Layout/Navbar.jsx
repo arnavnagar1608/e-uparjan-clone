@@ -12,6 +12,7 @@ const Navbar = () => {
     { nameKey: 'home', path: '/' },
     { nameKey: 'about_us', path: '/about' },
     { nameKey: 'farmer_reg', path: '/register' },
+    { nameKey: 'slot_booking', path: '/services/slot-booking' },
     { nameKey: 'track_status', path: '/status' },
     { nameKey: 'proc_centers', path: '/centers' },
     { nameKey: 'guidelines', path: '/guidelines' },
@@ -45,7 +46,6 @@ const Navbar = () => {
               </button>
               {dropdownOpen && (
                 <div className="absolute top-full left-0 w-48 bg-white text-gray-800 border-t-2 border-govSaffron-500 shadow-lg">
-                  <Link to="/services/slot-booking" className="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-100">{t('slot_booking')}</Link>
                   <Link to="/services/receipt" className="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-100">{t('print_receipt')}</Link>
                   <Link to="/services/grievance" className="block px-4 py-2 text-sm hover:bg-gray-100">{t('grievance')}</Link>
                 </div>
@@ -80,8 +80,7 @@ const Navbar = () => {
               </Link>
             ))}
             {/* Mobile Dropdown items added inline for simplicity */}
-            <Link to="/services/slot-booking" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium hover:bg-govGreen-700 hover:text-govSaffron-500 border-t border-govGreen-800 text-govSaffron-500">— {t('slot_booking')}</Link>
-            <Link to="/services/receipt" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium hover:bg-govGreen-700 hover:text-govSaffron-500 text-govSaffron-500">— {t('print_receipt')}</Link>
+            <Link to="/services/receipt" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium hover:bg-govGreen-700 hover:text-govSaffron-500 border-t border-govGreen-800 text-govSaffron-500">— {t('print_receipt')}</Link>
             <Link to="/services/grievance" onClick={() => setIsOpen(false)} className="block px-3 py-2 text-base font-medium hover:bg-govGreen-700 hover:text-govSaffron-500 text-govSaffron-500">— {t('grievance')}</Link>
           </div>
         </div>

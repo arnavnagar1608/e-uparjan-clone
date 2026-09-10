@@ -15,14 +15,33 @@ const Login = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate API call
-    setTimeout(() => {
+    
+    try {
+      const response = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ identifier: mobile, password })
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        setLoading(false);
+        // Save the farmer ID from the real database into localStorage
+        localStorage.setItem('activeFarmerId', data.user.farmerId);
+        navigate('/');
+      } else {
+        setLoading(false);
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("API Error:", error);
       setLoading(false);
-      navigate('/');
-    }, 1500);
+      alert('Could not connect to backend. Is node server.js running?');
+    }
   };
 
   const startAadhaarFlow = () => {

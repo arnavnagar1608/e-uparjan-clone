@@ -17,14 +17,13 @@ const TrackingDashboard = () => {
     address: 'Rau, Indore, Madhya Pradesh'
   };
 
-  const farmerToken = 127;
-  const avgProcessingTime = 5; // minutes
-  const totalTokensToday = 250;
-
   // Real-time prototype state
-  const [currentToken, setCurrentToken] = useState(114);
+  const [currentToken, setCurrentToken] = useState(0);
+  const [farmerToken, setFarmerToken] = useState(0);
   const [procurementStatus, setProcurementStatus] = useState('waiting'); // waiting, accepted
-  const [paymentStatus, setPaymentStatus] = useState('processing'); // processing, initiated, credited
+  const [paymentStatus, setPaymentStatus] = useState('processing');
+  const [bookingData, setBookingData] = useState(null);
+  const [farmerName, setFarmerName] = useState('Ramesh Kumar');
   
   // Notification Preferences State
   const [prefs, setPrefs] = useState({
@@ -35,6 +34,59 @@ const TrackingDashboard = () => {
     payment: true,
     govNotices: true
   });
+
+  const avgProcessingTime = 5; // minutes
+  const totalTokensToday = 250;
+
+  // Fetch real-time data from Backend API!
+  useEffect(() => {
+    const fetchQueue = async () => {
+      const activeFarmerId = localStorage.getItem('activeFarmerId');
+      if (!activeFarmerId) return;
+
+      try {
+        const response = await fetch(`http://localhost:5000/api/tracking/${activeFarmerId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setBookingData(data.bookingDetails);
+          setFarmerName(data.farmerDetails.name);
+          setFarmerToken(data.bookingDetails.farmerToken);
+          setCurrentToken(data.liveQueue.currentToken);
+          setProcurementStatus(data.bookingDetails.status);
+        }
+      } catch (e) {
+        console.error("API Connection Error", e);
+      }
+    };
+
+    fetchQueue();
+    // Poll the API every 3 seconds to get live token updates!
+    const interval = setInterval(fetchQueue, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // API Call for DEV SIMULATOR
+  const simulateAdvanceToken = async () => {
+    if (!bookingData) return;
+    try {
+      await fetch('http://localhost:5000/api/admin/advance-token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ centre: bookingData.centre })
+      });
+    } catch(e) {}
+  };
+
+  const simulateSuccess = async () => {
+    if (!bookingData) return;
+    try {
+      await fetch('http://localhost:5000/api/admin/simulate-success', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ farmerId: bookingData.farmerId })
+      });
+    } catch(e) {}
+  };
 
   // Calculate dynamic variables
   const tokensRemaining = Math.max(0, farmerToken - currentToken);
@@ -102,19 +154,19 @@ const TrackingDashboard = () => {
           <div className="mt-4 md:mt-0 p-3 bg-yellow-50 border border-yellow-400 rounded shadow-sm text-xs">
             <div className="font-bold text-yellow-800 mb-2">DEV SIMULATOR</div>
             <div className="flex space-x-2 items-center">
-              <button onClick={() => setCurrentToken(p => p + 1)} className="px-2 py-1 bg-yellow-500 text-white font-bold rounded">Next Token (+1)</button>
-              <button onClick={() => setProcurementStatus('accepted')} className="px-2 py-1 bg-green-600 text-white font-bold rounded">Simulate Success</button>
+              <button onClick={simulateAdvanceToken} className="px-2 py-1 bg-yellow-500 text-white font-bold rounded">Next Token (+1)</button>
+              <button onClick={simulateSuccess} className="px-2 py-1 bg-green-600 text-white font-bold rounded">Simulate Success</button>
             </div>
           </div>
         </div>
 
         {/* Top Info Bar */}
         <div className="bg-white gov-border p-4 mb-6 shadow-sm flex flex-wrap gap-y-4 justify-between items-center text-sm">
-          <div><span className="text-gray-500">Farmer:</span> <span className="font-bold text-gray-900">{farmerData.name}</span></div>
-          <div><span className="text-gray-500">Farmer ID:</span> <span className="font-bold text-gray-900">{farmerData.farmerId}</span></div>
-          <div><span className="text-gray-500">Centre:</span> <span className="font-bold text-gray-900">{farmerData.centre}</span></div>
-          <div><span className="text-gray-500">Crop:</span> <span className="font-bold text-gray-900">{farmerData.crop}</span></div>
-          <div><span className="text-gray-500">Date:</span> <span className="font-bold text-gray-900">{farmerData.date}</span></div>
+          <div><span className="text-gray-500">Farmer:</span> <span className="font-bold text-gray-900">{farmerName}</span></div>
+          <div><span className="text-gray-500">Farmer ID:</span> <span className="font-bold text-gray-900">{bookingData?.farmerId || 'Loading...'}</span></div>
+          <div><span className="text-gray-500">Centre:</span> <span className="font-bold text-gray-900">{bookingData?.centre || 'Loading...'}</span></div>
+          <div><span className="text-gray-500">Crop:</span> <span className="font-bold text-gray-900">{bookingData?.crop || 'Loading...'}</span></div>
+          <div><span className="text-gray-500">Date:</span> <span className="font-bold text-gray-900">{bookingData?.date || 'Loading...'}</span></div>
         </div>
 
         {/* Tab Navigation */}
