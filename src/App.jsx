@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 import TrackingDashboard from './pages/TrackingDashboard';
+import SlotBooking from './pages/SlotBooking';
 import { LanguageProvider } from './context/LanguageContext';
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
               <Route path="/contact" element={<StubPage titleKey="contact_us" />} />
               
               {/* Services Dropdown */}
-              <Route path="/services/slot-booking" element={<StubPage titleKey="slot_booking" />} />
+              <Route path="/services/slot-booking" element={<SlotBooking />} />
               <Route path="/services/receipt" element={<StubPage titleKey="print_receipt" />} />
               <Route path="/services/grievance" element={<StubPage titleKey="grievance" />} />
             </Routes>
